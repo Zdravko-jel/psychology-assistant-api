@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.37328.6 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyAssistant.Api", "PsychologyAssistant.Api\PsychologyAssistant.Api.csproj", "{1F115490-DC84-442E-A544-30AFF5FD8A7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyAssistant.Data", "PsychologyAssistant.Data\PsychologyAssistant.Data.csproj", "{BC96BA97-E855-402A-BFB2-E5A32B62EAF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyAssistant.AI", "PsychologyAssistant.AI\PsychologyAssistant.AI.csproj", "{AA60F664-8DA0-44F2-9580-459F30DE8B6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1F115490-DC84-442E-A544-30AFF5FD8A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F115490-DC84-442E-A544-30AFF5FD8A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F115490-DC84-442E-A544-30AFF5FD8A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC96BA97-E855-402A-BFB2-E5A32B62EAF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC96BA97-E855-402A-BFB2-E5A32B62EAF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC96BA97-E855-402A-BFB2-E5A32B62EAF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC96BA97-E855-402A-BFB2-E5A32B62EAF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA60F664-8DA0-44F2-9580-459F30DE8B6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA60F664-8DA0-44F2-9580-459F30DE8B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA60F664-8DA0-44F2-9580-459F30DE8B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA60F664-8DA0-44F2-9580-459F30DE8B6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
