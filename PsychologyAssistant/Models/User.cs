@@ -12,6 +12,7 @@ namespace PsychologyAssistant.Models
         public string PhoneNumber { get; set; }
         public string? LicenceNumber { get; set; }
         public string? OfficeAddress { get; set; }
-        public TimeSpan? WorkingHours { get; set; }
+        public TimeOnly? WorkingHoursStart { get; set; }
+        public TimeOnly? WorkingHoursEnd { get; set; }
     }
 }

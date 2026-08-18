@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologyAssistant.Data;
 
@@ -11,9 +12,11 @@ using PsychologyAssistant.Data;
 namespace PsychologyAssistant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260818161859_SeedRole")]
+    partial class SeedRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PsychologyAssistant.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f4fc27c-ffc2-4984-82b8-f3c6bc4c95f6",
+                            Id = "46760289-33cd-45b5-b027-fb8c92c69036",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "827c0aa2-9f26-4270-bde7-4a4e954c7d9f",
+                            Id = "a5bf3b20-f296-4cd1-9b8f-40824a5e597e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -519,10 +522,7 @@ namespace PsychologyAssistant.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<TimeOnly?>("WorkingHoursEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeOnly?>("WorkingHoursStart")
+                    b.Property<TimeSpan?>("WorkingHours")
                         .HasColumnType("time");
 
                     b.HasKey("Id");

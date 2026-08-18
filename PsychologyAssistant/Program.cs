@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PsychologyAssistant.Data;
+using PsychologyAssistant.Interfaces;
 using PsychologyAssistant.Models;
+using PsychologyAssistant.Service;
 
 namespace PsychologyAssistant
 {
@@ -16,10 +18,16 @@ namespace PsychologyAssistant
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers();  
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             // This makes the connection with the database
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -60,6 +68,8 @@ namespace PsychologyAssistant
                     )
                 };
             });
+
+            builder.Services.AddScoped<ITokenService, TokenService>();
 
             var app = builder.Build();
 
