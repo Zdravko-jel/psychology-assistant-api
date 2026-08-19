@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PsychologyAssistant.Data;
 using PsychologyAssistant.DTOs.Symptom;
+using PsychologyAssistant.Interfaces;
 using PsychologyAssistant.Mappers;
 
 namespace PsychologyAssistant.Controllers
@@ -11,10 +12,10 @@ namespace PsychologyAssistant.Controllers
     [ApiController]
     public class SymptomController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public SymptomController(ApplicationDbContext context)
+        private readonly ISymptomRepo _symptomRepo;
+        public SymptomController(ApplicationDbContext context, ISymptomRepo symptomRepo)
         {
-            _context = context;
+            _symptomRepo = symptomRepo;
         }
 
         [HttpGet]
@@ -23,7 +24,7 @@ namespace PsychologyAssistant.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var symptoms = await this._context.Symptoms.ToListAsync();
+            var symptoms = await this._symptomRepo.GetAllAsync();
             var symptomDtos = symptoms.Select(x => x.ToSymptomDto()).ToList();
             return Ok(symptomDtos);
         }
@@ -34,7 +35,7 @@ namespace PsychologyAssistant.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var symptom = await this._context.Symptoms.FindAsync(id);
+            var symptom = await this._symptomRepo.GetOneAsync(id);
             if (symptom == null)
             {
                 return NotFound();
@@ -50,8 +51,7 @@ namespace PsychologyAssistant.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var symptom = createSymptomDto.ToSymptom();
-            await this._context.Symptoms.AddAsync(symptom);
-            await this._context.SaveChangesAsync();
+            await this._symptomRepo.CreateAsync(symptom);
             return CreatedAtAction(nameof(GetSymptom), new { id = symptom.Id }, symptom.ToSymptomDto());
         }
 
@@ -62,13 +62,11 @@ namespace PsychologyAssistant.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var symptom = await this._context.Symptoms.FindAsync(id);
+            var symptom = await this._symptomRepo.UpdateAsync(id, updateSymptomDto);
             if (symptom == null)
             {
                 return NotFound();
             }
-            symptom.Name = updateSymptomDto.Name;
-            await this._context.SaveChangesAsync();
             return Ok(symptom.ToSymptomDto());
         }
 
@@ -79,13 +77,11 @@ namespace PsychologyAssistant.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var symptom = await this._context.Symptoms.FindAsync(id);
-            if (symptom == null)
+            var result = await this._symptomRepo.DeleteAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
-            this._context.Symptoms.Remove(symptom);
-            await this._context.SaveChangesAsync();
             return NoContent();
         }
     }

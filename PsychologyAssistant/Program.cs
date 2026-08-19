@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using PsychologyAssistant.Data;
 using PsychologyAssistant.Interfaces;
 using PsychologyAssistant.Models;
+using PsychologyAssistant.Repositories;
 using PsychologyAssistant.Service;
 
 namespace PsychologyAssistant
@@ -69,6 +70,7 @@ namespace PsychologyAssistant
                 };
             });
 
+            builder.Services.AddScoped<ISymptomRepo, SymptomRepo>();
             builder.Services.AddScoped<ITokenService, TokenService>();
 
             var app = builder.Build();
