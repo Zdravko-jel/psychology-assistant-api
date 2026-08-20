@@ -71,6 +71,7 @@ namespace PsychologyAssistant
             });
 
             builder.Services.AddScoped<ISymptomRepo, SymptomRepo>();
+            builder.Services.AddScoped<IDocumentRepo, DocumentRepo>();
             builder.Services.AddScoped<ITokenService, TokenService>();
 
             var app = builder.Build();

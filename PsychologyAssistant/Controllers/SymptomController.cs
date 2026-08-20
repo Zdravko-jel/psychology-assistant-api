@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PsychologyAssistant.Data;
 using PsychologyAssistant.DTOs.Symptom;
 using PsychologyAssistant.Interfaces;
