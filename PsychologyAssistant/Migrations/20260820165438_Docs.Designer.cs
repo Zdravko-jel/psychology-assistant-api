@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologyAssistant.Data;
 
@@ -11,9 +12,11 @@ using PsychologyAssistant.Data;
 namespace PsychologyAssistant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260820165438_Docs")]
+    partial class Docs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PsychologyAssistant.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "59745417-c821-4b19-b0b3-6823e8a45f8c",
+                            Id = "75e046d2-5d1d-4eec-bb5c-809c4e978b6e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "645155f0-32c1-4605-a56b-daec04c873e2",
+                            Id = "2da07cb6-0edd-456e-a761-b336d4191ed4",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -314,10 +317,6 @@ namespace PsychologyAssistant.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EmContactPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

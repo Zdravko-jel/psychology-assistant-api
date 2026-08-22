@@ -12,13 +12,12 @@ namespace PsychologyAssistant.Controllers
     public class SymptomController : ControllerBase
     {
         private readonly ISymptomRepo _symptomRepo;
-        public SymptomController(ApplicationDbContext context, ISymptomRepo symptomRepo)
+        public SymptomController(ISymptomRepo symptomRepo)
         {
             _symptomRepo = symptomRepo;
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             if (!ModelState.IsValid)
@@ -29,7 +28,6 @@ namespace PsychologyAssistant.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize]
         public async Task<IActionResult> GetSymptom(int id)
         {
             if (!ModelState.IsValid)
@@ -44,7 +42,6 @@ namespace PsychologyAssistant.Controllers
 
         [HttpPost]
         [Route("create")]
-        [Authorize]
         public async Task<IActionResult> CreateSymptom([FromBody] CreateSymptomDto createSymptomDto)
         {
             if (!ModelState.IsValid)
@@ -56,7 +53,6 @@ namespace PsychologyAssistant.Controllers
 
         [HttpPut]
         [Route("update/{id:int}")]
-        [Authorize]
         public async Task<IActionResult> UpdateSymptom([FromRoute] int id, [FromBody] UpdateSymptomDto updateSymptomDto)
         {
             if (!ModelState.IsValid)
@@ -71,7 +67,6 @@ namespace PsychologyAssistant.Controllers
 
         [HttpDelete]
         [Route("delete/{id:int}")]
-        [Authorize]
         public async Task<IActionResult> DeleteSymptom([FromRoute] int id)
         {
             if (!ModelState.IsValid)

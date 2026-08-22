@@ -53,7 +53,7 @@ namespace PsychologyAssistant.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("delete/{id:guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var result = await _documentRepo.DeleteAsync(id);
@@ -63,7 +63,7 @@ namespace PsychologyAssistant.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:guid}")]
         public async Task<IActionResult> GetDocument([FromRoute] Guid id)
         {
             var document = await _documentRepo.GetOneAsync(id);
