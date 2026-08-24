@@ -43,6 +43,12 @@ namespace PsychologyAssistant.Repositories
                 return false;
             }
 
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), document.FilePath);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
             _context.Documents.Remove(document);
             await _context.SaveChangesAsync();
             return true;
