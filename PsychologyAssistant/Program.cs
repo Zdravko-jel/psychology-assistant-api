@@ -77,6 +77,7 @@ namespace PsychologyAssistant
             builder.Services.AddScoped<INoteRepo, NoteRepo>();
             builder.Services.AddScoped<IPatientRepo, PatientRepo>();
             builder.Services.AddScoped<ISessionRepo, SessionRepo>();
+            builder.Services.AddScoped<IPatientFileRepo, PatientFileRepo>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
 

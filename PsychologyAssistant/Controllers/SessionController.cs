@@ -77,7 +77,7 @@ namespace PsychologyAssistant.Controllers
         public async Task<IActionResult> AddNote(int id, SessionNoteDto note)
         {
             var updatedSession = await _sessionRepo.AddNote(id, note.NoteId);
-            if (updatedSession == null)
+            if (!updatedSession)
             {
                 return NotFound();
             }
