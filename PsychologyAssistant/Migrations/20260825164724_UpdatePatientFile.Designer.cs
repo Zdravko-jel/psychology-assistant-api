@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologyAssistant.Data;
 
@@ -11,9 +12,11 @@ using PsychologyAssistant.Data;
 namespace PsychologyAssistant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260825164724_UpdatePatientFile")]
+    partial class UpdatePatientFile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PsychologyAssistant.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3df7213b-8b5e-4229-8780-cfdaede1640c",
+                            Id = "e82c37dc-6c22-4fa7-a612-b183927ba9c2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b4f2b493-f10f-43ec-9249-98cd7deb71ca",
+                            Id = "35f5f51d-e680-4e48-8a7a-252659ca0aa6",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -257,31 +260,6 @@ namespace PsychologyAssistant.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("PsychologyAssistant.Models.MonthlyReport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("storedFileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reports");
-                });
-
             modelBuilder.Entity("PsychologyAssistant.Models.Note", b =>
                 {
                     b.Property<int>("Id")
@@ -387,9 +365,6 @@ namespace PsychologyAssistant.Migrations
                     b.Property<string>("AnxietyLevels")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ClosedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -399,7 +374,7 @@ namespace PsychologyAssistant.Migrations
                     b.Property<DateTime?>("DiagnosisAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DiagnosisId")
+                    b.Property<int?>("DiagnosisId")
                         .HasColumnType("int");
 
                     b.Property<string>("MoodLevels")
@@ -707,9 +682,7 @@ namespace PsychologyAssistant.Migrations
                 {
                     b.HasOne("PsychologyAssistant.Models.Diagnosis", "Diagnosis")
                         .WithMany()
-                        .HasForeignKey("DiagnosisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiagnosisId");
 
                     b.HasOne("PsychologyAssistant.Models.Patient", "Patient")
                         .WithMany()

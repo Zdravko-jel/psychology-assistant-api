@@ -20,6 +20,7 @@ namespace PsychologyAssistant.Data
         public DbSet<PatientFile> PatientFiles { get; set; }
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<MonthlyReport> Reports { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

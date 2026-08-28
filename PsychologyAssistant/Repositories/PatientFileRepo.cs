@@ -32,8 +32,9 @@ namespace PsychologyAssistant.Repositories
             if (diagnosis == null)
                 return false;
 
-            file.DiagnosisId = patientFileDto.DiagnosisId;
+            file.DiagnosisId = (int)patientFileDto.DiagnosisId;
             file.Diagnosis = diagnosis;
+            file.DiagnosisAdded = DateTime.Now;
             _context.PatientFiles.Update(file);
             await _context.SaveChangesAsync();
             return true;
@@ -95,8 +96,9 @@ namespace PsychologyAssistant.Repositories
             if (diagnosis == null)
                 return false;
 
-            file.DiagnosisId = patientFileDto.DiagnosisId;
+            file.DiagnosisId = (int)patientFileDto.DiagnosisId;
             file.Diagnosis = diagnosis;
+            file.DiagnosisAdded = DateTime.Now;
             _context.PatientFiles.Update(file);
             await _context.SaveChangesAsync();
             return true;
@@ -112,6 +114,8 @@ namespace PsychologyAssistant.Repositories
                 return false;
 
             file.Summary = patientFileDto.Summary;
+            file.Status = Enums.PatientFileStatus.Closed;
+            file.ClosedOn = DateTime.Now;
             _context.PatientFiles.Update(file);
             await _context.SaveChangesAsync();
             return true;
@@ -126,7 +130,7 @@ namespace PsychologyAssistant.Repositories
             if (patient == null)
                 return null;
 
-            var patientFile = new PatientFile { 
+            var patientFile = new PatientFile {
                 PatientId = createPatientFile.PatientId,
                 Patient = patient,
                 User = user,
@@ -134,6 +138,9 @@ namespace PsychologyAssistant.Repositories
                 Summary = "empty",
                 DiagnosisId = -1,
                 Diagnosis = null,
+                DiagnosisAdded = null,
+                Status = Enums.PatientFileStatus.Open,
+                ClosedOn = null,
                 Sessions = new List<Session>(),
                 Symptoms = new List<Symptom>(),
                 MoodLevels = new List<int>(),

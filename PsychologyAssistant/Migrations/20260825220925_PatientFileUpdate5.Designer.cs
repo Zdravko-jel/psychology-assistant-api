@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologyAssistant.Data;
 
@@ -11,9 +12,11 @@ using PsychologyAssistant.Data;
 namespace PsychologyAssistant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260825220925_PatientFileUpdate5")]
+    partial class PatientFileUpdate5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PsychologyAssistant.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3df7213b-8b5e-4229-8780-cfdaede1640c",
+                            Id = "6b416055-620e-4293-bb55-f9fa79d48faf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b4f2b493-f10f-43ec-9249-98cd7deb71ca",
+                            Id = "f7a09fe6-c0e6-4375-be3d-9a9585024fcc",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -265,7 +268,23 @@ namespace PsychologyAssistant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ClosedFilesIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiagnosesIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewPatientsIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionsIds")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologyAssistant.Data;
 
@@ -11,9 +12,11 @@ using PsychologyAssistant.Data;
 namespace PsychologyAssistant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260825183352_ReportsUpdate2")]
+    partial class ReportsUpdate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PsychologyAssistant.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3df7213b-8b5e-4229-8780-cfdaede1640c",
+                            Id = "e8d72c5f-cd55-416b-a8ae-8e953dc32cde",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b4f2b493-f10f-43ec-9249-98cd7deb71ca",
+                            Id = "75681675-0448-4488-82c6-1327a6290dc7",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -265,11 +268,23 @@ namespace PsychologyAssistant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ClosedFilesIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiagnosesIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("NewPatientsIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionsIds")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -387,9 +402,6 @@ namespace PsychologyAssistant.Migrations
                     b.Property<string>("AnxietyLevels")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ClosedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -399,7 +411,7 @@ namespace PsychologyAssistant.Migrations
                     b.Property<DateTime?>("DiagnosisAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DiagnosisId")
+                    b.Property<int?>("DiagnosisId")
                         .HasColumnType("int");
 
                     b.Property<string>("MoodLevels")
@@ -707,9 +719,7 @@ namespace PsychologyAssistant.Migrations
                 {
                     b.HasOne("PsychologyAssistant.Models.Diagnosis", "Diagnosis")
                         .WithMany()
-                        .HasForeignKey("DiagnosisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiagnosisId");
 
                     b.HasOne("PsychologyAssistant.Models.Patient", "Patient")
                         .WithMany()
